@@ -87,7 +87,7 @@ FACTION_OUTLAWS = rp.AddFaction({name = 'Outlaws', printName = 'Изгои', npc
 
 FACTION_BANDITS = rp.AddFaction({name = 'Bandits', printName = 'Отверженные', npcs = { 
     rp_city17_urfim = {
-		{Vector(-2879.679688,-7260.000488,80.031250), Angle(0, 90, 0), 'models/player/tnb/citizens/male_12_fix.mdl'}
+		{Vector(-2879.679688,-7260.000488,80.031250), Angle(0, -90, 0), 'models/player/tnb/citizens/male_12_fix.mdl'}
 	},
 
 }, 

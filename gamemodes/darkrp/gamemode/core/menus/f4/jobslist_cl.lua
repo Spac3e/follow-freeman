@@ -56,9 +56,9 @@ function PANEL:Paint(w, h)
 
 		draw.SimpleTextOutlined(ba.str.FormatTime(self.job.unlockTime-LocalPlayer():GetPlayTime()), 'rp.ui.22', w - 10, h * 0.5, ui.col.White, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER, 1, ui.col.Black)
 
-	elseif !LocalPlayer():TeamUnlocked(self.job) then
+	--elseif !LocalPlayer():TeamUnlocked(self.job) then
 
-		draw.SimpleTextOutlined(rp.FormatMoney(self.job.unlockPrice), 'rp.ui.22', w - 10, h * 0.5, ui.col.White, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER, 1, ui.col.Black)
+		--draw.SimpleTextOutlined(rp.FormatMoney(self.job.unlockPrice), 'rp.ui.22', w - 10, h * 0.5, ui.col.White, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER, 1, ui.col.Black)
 
 	elseif self.job.max ~= 0 then
 
@@ -127,7 +127,7 @@ function PANEL:DoClick()
 				return rp.NotifyTerm(NOTIFY_ERROR, 'CannotAfford')
 
 			else
-
+				print(ui.Request)
 				ui.Request(rp.GetTerm('ConfirmAction'), rp.GetTerm('UnlockTeam', self.job.name, rp.FormatMoney(self.job.unlockPrice)), function(b)
 
 					if b then

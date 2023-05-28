@@ -252,9 +252,9 @@ rp.LoadModules('modules') --Depricated
 
 rp.include_sv'cfg/content.lua'
 
-rp.include_sh'cfg/factions.lua'
-
 rp.include_sh'cfg/jobs.lua'
+
+rp.include_sh'cfg/factions.lua'
 
 rp.include_dir('jobs', false)
 

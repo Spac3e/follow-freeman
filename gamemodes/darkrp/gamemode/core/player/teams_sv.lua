@@ -1,10 +1,14 @@
 util.AddNetworkString('PlayerDisguise')
 
 function PLAYER:Disguise(t, time)
+	local team_t = rp.teams[t]
 	if not self:Alive() then return end
 	self:SetNetVar('DisguiseTeam', t)
 	if self:GetNetVar('job') then
 		self:SetNetVar('job', nil)
+	end
+	if rp.teams[t] and rp.teams[t].disableDisguise  then
+		return false
 	end
 	self:SetModel(team.GetModel(t))
 	if (time) then
@@ -88,6 +92,7 @@ net('PlayerDisguise', function(len, pl)
 		--pl.NextDisguise = CurTime() + 300
 	end
 end)
+
 hook('PlayerDeath', 'teams.PlayerDeath', function(pl)
 	if pl:IsDisguised() then
 		pl:UnDisguise()
