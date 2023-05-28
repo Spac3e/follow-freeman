@@ -256,7 +256,7 @@ net('rp.OrgsMenu', function()
 	--------------------------------------------
 	if (perms.Owner) then
 		fr.btnCol = ui.Create('DButton', function(self)
-			self:SetText("Езменить цвет")
+			self:SetText("Изменить цвет")
 			self:SetTall(25)
 			self:DockMargin(0, 5, 0, 0)
 			self:Dock(BOTTOM)
@@ -275,7 +275,7 @@ net('rp.OrgsMenu', function()
 
 					fr.colPicker:Remove()
 					fr.lblMoTD:SetText('Новости')
-					s:SetText('Езменить цвет')
+					s:SetText('Изменить цвет')
 				else
 					fr.colPicker = ui.Create('DColorMixer', function(col)
 						col:SetPos(fr.txtMoTD.x, fr.lblMoTD:GetTall())

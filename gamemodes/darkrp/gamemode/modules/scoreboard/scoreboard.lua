@@ -123,7 +123,7 @@ function PANEL:Init()
 
 	self.Description = ui.Create("DLabel", self)
 
-	self.Description:SetText("Наш Discord сервер - www.urf.im/discord/")
+	self.Description:SetText("Наш Discord сервер - https://discord.gg/tAkd8Y99hS")
 
 	self.Uptime = ui.Create("DLabel", self)
 

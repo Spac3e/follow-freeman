@@ -1,3 +1,5 @@
+
+-----------------------------------------------------
 AddCSLuaFile()
 
 ENT.Base = 'money_printer'
@@ -6,11 +8,11 @@ ENT.Category = 'Money Printers'
 ENT.Spawnable = true
 
 ENT.MaxHP = 80 -- хп
-ENT.PrintAmount = 13 -- количество печати
+ENT.PrintAmount = 135 -- количество печати
 ENT.MaxInk = 5  -- максимум чернил
 
 if SERVER then
-	ENT.SeizeReward = 50 --Награда за уничтожение
+	ENT.SeizeReward = 500 --Награда за уничтожение
 	ENT.Model = 'models/props_c17/consolebox05a.mdl'
 else
 	function ENT:CalculateScreenPos(pos, ang)

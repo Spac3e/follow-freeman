@@ -46,7 +46,7 @@ RegisterDrug(DRUG);
 AddCSLuaFile()
 
 SWEP.PrintName				= "Зомби Кулаки"
-SWEP.Author					= "urf.im"
+SWEP.Author					= "За Фрименом"
 SWEP.Purpose				= "МОЗГИИИИИИИИИ."
 
 SWEP.Slot					= 0

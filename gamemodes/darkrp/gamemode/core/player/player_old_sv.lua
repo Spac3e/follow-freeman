@@ -241,7 +241,11 @@ function PLAYER:ChangeTeam(t, force)
 		rp.resetLaws()
 	end
 
-	rp.NotifyAll(NOTIFY_GENERIC, rp.Term('ChangeJob'), self, (string.match(TEAM.name, '^h?[AaEeIiOoUu]') and 'an' or 'a'), TEAM.name)
+	--if not is_silent and not rp.cfg.Serious then
+		rp.NotifyAll(NOTIFY_GENERIC, rp.Term('ChangeJob'), self, TEAM.name)
+	--end
+	
+	print(self, 'ChangeJob to', TEAM.name, 'faction', TEAM.faction and rp.Factions[TEAM.faction] and rp.Factions[TEAM.faction].printName or TEAM.faction)
 
 	if self:GetNetVar("HasGunlicense") then
 		self:SetNetVar("HasGunlicense", nil)

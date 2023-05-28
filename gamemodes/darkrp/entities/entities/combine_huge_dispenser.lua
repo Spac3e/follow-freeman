@@ -90,8 +90,8 @@ else
 	end
 
 	hook('InitPostEntity', function()
-		for k, v in pairs(rp.cfg.RationDispenser[game.GetMap()] or {}) do
-			local ent = ents.Create('combine_dispenser')
+		for k, v in pairs(rp.cfg.RationDispenserHuge[game.GetMap()] or {}) do
+			local ent = ents.Create('combine_huge_dispenser')
 			ent:SetPos(v.Pos)
 			ent:SetAngles(v.Ang)
 			ent:Spawn()

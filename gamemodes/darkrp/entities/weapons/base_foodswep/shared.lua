@@ -1,7 +1,7 @@
 SWEP.Instructions 	= ""
 SWEP.UrfFood  		= true
-SWEP.Category 		= "[urf] Еда"
-SWEP.Author 		= "urf.im"
+SWEP.Category 		= "[За Фрименом] Еда"
+SWEP.Author 		= "За Фрименом"
 SWEP.IconLetter		= "V"
 SWEP.Spawnable		= false
 SWEP.AdminOnly		= true

@@ -354,8 +354,7 @@ local function ChangeJob(ply, args)
 
 	local job = replace or args
 	rp.NotifyAll(NOTIFY_GENERIC, rp.Term('ChangeJob'), ply, (string.match(job, '^h?[AaEeIiOoUu]') and 'an' or 'a'), job)
-
-	ply:SetNetVar('job', job) 
+	ply:SetNetVar('job', job)
 	return ""
 end
 rp.AddCommand("/job", ChangeJob)

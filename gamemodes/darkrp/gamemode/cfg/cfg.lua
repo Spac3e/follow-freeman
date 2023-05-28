@@ -1,7 +1,7 @@
 
 rp.Discount = 1
 
-rp.cfg.ManagerURL = 'https://vk.com/nikitimus'
+rp.cfg.ManagerURL = 'https://discord.gg/tAkd8Y99hS'
 
 rp.cfg.MaxPrinters = 3
 
@@ -235,6 +235,9 @@ rp.cfg.VendingMachines = {
 rp.cfg.RationDispenser = {
 	rp_city17_urfim  = {}
 }
+rp.cfg.RationDispenserHuge = {
+	rp_city17_urfim  = {}
+}
 rp.cfg.CombineLocks = {
 	rp_city17_urfim  = {}
 }
@@ -250,6 +253,7 @@ rp.cfg.SpawnDisallow = {
 	metal_detector		= true,
 	flag 				= true,
 }
+
 local isSerious = game.GetMap("netu_off_net_no_obrubleno_map_drugoe_nigga_pigga_snigga_digga_varus_barus_cock_ass_nigga_fat_balls_dog.bsp")
 if !isSerious then isSerious = false end
 rp.cfg.Spawns = {
@@ -363,12 +367,14 @@ rp.cfg.DefaultSpawnPoints = {
 
 rp.cfg.SpawnPos = {
 	rp_city17_urfim = {
-		Vector(-3243.287109,-352.107117,48.031250), 
-		Vector(-3592.043457,-204.045837,48.031250), 
-        Vector(-3743.285889,-324.721527,48.031250), 
-		Vector(-4181.323242,-200.459015,48.839146),
-		Vector(-4507.963867,-341.066864,48.031250),
-		Vector(-4662.066406,-64.577675,96.031250),
+		Vector(-3598.748291,-201.331543,48.031250), 
+		Vector(-3597.135986,-292.811859,48.031250), 
+        Vector(-4041.913330,-295.828796,48.031250), 
+		Vector(-4044.740723,-187.646194,48.031250),
+		Vector(-4489.057617,-203.720566,48.031250),
+		Vector(-4534.450684,-315.901550,48.031250),
+		Vector(-3167.226563,-99.505379,48.031250),
+		Vector(-3183.401367,-581.856262,48.031250),
 	},
 }
 

@@ -1157,8 +1157,6 @@ TEAM_SUN_Fan = rp.addTeam("Фанатик Рассвета", {
 
 })
 
-
-
 TEAM_SUN_RIS = rp.addTeam("Последователь Рассвета", {
 
     color = Color(0, 255, 255),
@@ -1281,7 +1279,7 @@ TEAM_SUN_STR = rp.addTeam("Страж Рассвета", {
 
 ]],
 
-	weapons = {"weapon_bp_sniper","swb_xm1014","swb_m249","door_ram","lockpick","keypad_cracker"},
+	weapons = {"weapon_bp_sniper","swb_xm1014","swb_m249","door_ram","lockpick","keypad_cracker", "cloaking-10seconds"},
 
 	salary = 30,
 

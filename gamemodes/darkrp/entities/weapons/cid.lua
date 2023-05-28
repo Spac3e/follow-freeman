@@ -100,7 +100,7 @@ function SWEP:Initialize()
 		self.ViewModelBoneMods = table.FullCopy( self.ViewModelBoneMods )
 
         -- Нас Рано
-		local whois = (self.Owner:Team() == TEAM_CITIZEN3 and "tarjetazero") or (self.Owner:Team() == TEAM_CITIZEN4 and "tarjetazero") or (self.Owner:Team() == TEAM_CITIZEN6 and "tarjeta4") or (self.Owner:Team() == TEAM_REFERENT and "tarjeta3") or (self.Owner:Team() == TEAM_CITIZEN5 and "tarjeta4") or (self.Owner:IsCWU() and "tarjeta4") or "tarjeta2"
+		local whois = (self.Owner:Team() == TEAM_CITIZEN3 and "tarjetazero") or (self.Owner:Team() == TEAM_CITIZEN4 and "tarjetazero") or (self.Owner:Team() == TEAM_LOYAL and "tarjeta4") or (self.Owner:Team() == TEAM_REFERENT and "tarjeta3") or (self.Owner:Team() == TEAM_CITIZEN5 and "tarjeta4") or (self.Owner:IsCWU() and "tarjeta4") or "tarjeta2"
 		self.VElements['card'].model = "models/dorado/" .. whois .. ".mdl"
 		self.WElements['card'].model = "models/dorado/" .. whois .. ".mdl"
 		self:CreateModels(self.VElements) // create viewmodels
