@@ -16,6 +16,7 @@ function ENT:Initialize()
 	self:DropToFloor()
 	self:SetCollisionGroup(COLLISION_GROUP_DEBRIS_TRIGGER )
 	self:SetMaxYawSpeed(90)
+	self:ResetSequence( self:LookupSequence("idle_all_01") );
 end
 
 function ENT:AcceptInput(input, activator, caller)

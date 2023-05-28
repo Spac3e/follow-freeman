@@ -1,7 +1,7 @@
 --[[
 Server Name: λ HL2RP | Classic | Cuтu-17
 Server IP:   185.221.196.56:27016
-File Path:   addons/new_cloacking/lua/weapons/cloaking-10seconds.lua
+File Path:   addons/[urf.im] org pm #2/lua/weapons/cloaking_prime.lua
 		 __        __              __             ____     _                ____                __             __         
    _____/ /_____  / /__  ____     / /_  __  __   / __/____(_)__  ____  ____/ / /_  __     _____/ /____  ____ _/ /__  _____
   / ___/ __/ __ \/ / _ \/ __ \   / __ \/ / / /  / /_/ ___/ / _ \/ __ \/ __  / / / / /    / ___/ __/ _ \/ __ `/ / _ \/ ___/
@@ -12,12 +12,10 @@ File Path:   addons/new_cloacking/lua/weapons/cloaking-10seconds.lua
 
 AddCSLuaFile()
 
-SWEP.Author                 =   "CrimsonEclipse"
-SWEP.PrintName              =   "Cloaking"
+SWEP.Author                 =   ""
+SWEP.PrintName              =   "CLOAKING.PRIME"
 SWEP.Base                   =   "weapon_base"
-SWEP.Instructions           =   [[Left-Click: Toggle Cloak
-Right-Click: N/A]]
-SWEP.Spawnable              =   true
+SWEP.Spawnable              =   false
 SWEP.AdminSpawnable         =   true
 SWEP.AdminOnly 				= 	true
 
@@ -103,14 +101,8 @@ end
 local getVel, transAmount, plyweap, col, Alpha, AlphaMIN, WepAlpha, is_cloaked
 local math_max = math.max
 local math_approach = math.Approach
-local CurrentTime = CurTime
-local CT
 
 local function PlyPostThink(ply) 
-	CT = CurrentTime()
-	if (ply.CloakPostThinkDelay or 0) > CT then return end
-	ply.CloakPostThinkDelay = CT + 0.1
-	
     getVel = ply:GetVelocity()
     transAmount = math_max(0, getVel:Length() - 75)
     plyweap = ply:GetActiveWeapon()
@@ -120,13 +112,12 @@ local function PlyPostThink(ply)
 	WepAlpha = transAmount >= 200 and transAmount or 0
 
     if ply:GetNWFloat("Cloak_Recloaked") == nil then
-		ply:SetNWFloat("Cloak_Recloaked", CT)
+		ply:SetNWFloat("Cloak_Recloaked", CurTime())
     end
 	
 	is_cloaked = ply:GetNWBool("Cloaked1")
 
-	if is_cloaked and ply:Alive() and ply:GetNWFloat("Cloak_Recloaked") <= CT and IsValid(plyweap) then
-		--print('Cloaked active 1')
+	if is_cloaked and ply:Alive() and ply:GetNWFloat("Cloak_Recloaked") <= CurTime() and IsValid(plyweap) then
 		ply:SetRenderMode(RENDERMODE_TRANSALPHA)
 		ply:SetColor(Color(255, 255, 255, Alpha))
 		ply:RemoveAllDecals()
@@ -135,7 +126,6 @@ local function PlyPostThink(ply)
 	end
 
 	if not ply:GetNWBool("Cloaked2") and not is_cloaked and IsValid(plyweap) then
-		--print('!Cloaked deactive 1')
 		plyweap:SetRenderMode(0)
 		plyweap:SetColor(Color(255, 255, 255, 255))
 	end
@@ -171,7 +161,7 @@ local function EntFiredBullets(ent, bullet)
 	if (ent:GetNWBool("Cloaked1") or ent:GetNWBool("Cloaked2")) and IsValid(ent) then
 		local entweap = ent:GetActiveWeapon()
 		
-		ent:SetNWFloat("Cloak_Recloaked", CurTime() + (ent:GetNWBool("Cloaked1") and 1 or 5))
+		ent:SetNWFloat("Cloak_Recloaked", CurTime() + (ent:GetNWBool("Cloaked1") and 2 or 5))
 		ent:SetColor(Color(255, 255, 255, 255))
 		ent:SetDSP(0)
 		

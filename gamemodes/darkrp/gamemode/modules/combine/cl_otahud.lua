@@ -1,4 +1,3 @@
--- Очень сложный код с HecuRP 2019, прикиньте этот файл с 2019 года не обновлялся, крутые кодеры у юрфа, да?
 local function PowOfTwo(n)
     n = math.floor(n); return (n % 2 == 0) and n or n + 1;  
 end
@@ -10,11 +9,15 @@ local crc = util.CRC;
 local TSort = table.sort;
 local RenderedAndSortedPlayers = {};
 
+local ValidTable = {
+    [FACTION_OTA] = true
+};
+
 timer.Remove('hl2hecu-rsp-cached2');
 timer.Create('hl2hecu-rsp-cached2', .5, 0, function()
     local LP = LocalPlayer();
     if (!IsValid(LP)) then return end
-    if LocalPlayer():GetFaction() != FACTION_OTA then return end
+    if (!ValidTable[LP:GetFaction()]) then return end
 
     local plys = player.GetAll();
     TSort( plys, function(a,b) return a:GetPos():DistToSqr(LP:GetPos()) > b:GetPos():DistToSqr(LP:GetPos()) end );
@@ -22,7 +25,8 @@ timer.Create('hl2hecu-rsp-cached2', .5, 0, function()
 end);
 
 hook.Add( "PostDrawTranslucentRenderables", "rp.HUD.OTA", function()
-    if !LocalPlayer():GetFaction() != FACTION_OTA then return end
+    if (!ValidTable[LocalPlayer():GetFaction()]) then return end
+
     local scale      = 10;
     local scale_3d2d = 1 / scale;
 
@@ -76,8 +80,8 @@ hook.Add( "PostDrawTranslucentRenderables", "rp.HUD.OTA", function()
             );
 
             if (LocalPlayer():CanSeeEnt(ply)) then
-				local GetJobTable = ply:GetDisguiseJobTable() or ply:GetJobTable()
-                local _TEMP = (GetJobTable.loyalty and rp.GetTerm('loyalty')[GetJobTable.loyalty]) or 'Неизвестно';
+				local JobTable = ply:GetDisguiseJobTable() or ply:GetJobTable()
+                local _TEMP = (JobTable.loyalty and rp.GetTerm('loyalty')[JobTable.loyalty]) or 'Неизвестно';
                 cam.IgnoreZ( true );
                     draw.SimpleText( 'CID: ' .. left(data, 3) .. ':' .. right(data, 2), "DermaLarge", 0, -playerscales.z + 50 + 525, Color(255,255,255), TEXT_ALIGN_CENTER);
                     draw.SimpleText( 'Лояльность: ' .. _TEMP, "DermaLarge", 0, -playerscales.z + 70 + 525, Color(255,255,255), TEXT_ALIGN_CENTER);
@@ -85,9 +89,9 @@ hook.Add( "PostDrawTranslucentRenderables", "rp.HUD.OTA", function()
             end
 
             cam.IgnoreZ( true );
-               draw.SimpleText( ply:Health(), "DermaLarge", playerscales.x + scale, -playerscales.z, Color(255,0,0) );
+                draw.SimpleText( ply:Health(), "DermaLarge", playerscales.x + scale, -playerscales.z, Color(255,0,0) );
                 draw.SimpleText( ply:Armor(), "DermaLarge", playerscales.x + scale, -playerscales.z + 30, Color(0,0,255) );
-         --   cam.IgnoreZ( false );
+            cam.IgnoreZ( false );
         cam.End3D2D();
     end
 end );

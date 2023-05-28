@@ -30,7 +30,7 @@ FACTION_OTA = rp.AddFaction({name = 'OTA', printName = 'OTA', npcs = {
 
 FACTION_HELIX = rp.AddFaction({name = 'HELIX', printName = 'MPF.HELIX', npcs = {
 	rp_city17_urfim = {
-		{Vector(1979.968750,254.514481,80.031250), Angle(0, -180, 0), 'models/dpfilms/metropolice/civil_medic.mdl'}
+		{Vector(1979.940552,206.857437,80.031250), Angle(0, -180, 0), 'models/dpfilms/metropolice/civil_medic.mdl'}
 	}
 }})
 
@@ -100,15 +100,9 @@ FACTION_BANDITS = rp.AddFaction({name = 'Bandits', printName = 'Отвержен
 	end,
 })
 
-FACTION_PULP = rp.AddFaction({name = 'SWAT', printName = 'SWAT', npcs = {
-	rp_city17_urfim = {
-		{Vector(-5566.916504,-5884.031250,80.031250), Angle(0, -90, 0),  'models/player/tcguard/tcguard.mdl'}
-	}
-}})
-
 FACTION_LEGION = rp.AddFaction({name = 'Legion', printName = '9-th Legion', npcs = {
 	rp_city17_urfim = {
-		{Vector(6012.548828,-1707.662109,2180.031250), Angle(0, 90, 0),  'models/niik/player/01ar_combine_soldier02_pm_n.mdl'}
+		{Vector(5301.151855,-739.968750,76.031250), Angle(0, 90, 0),  'models/niik/player/01ar_combine_soldier02_pm_n.mdl'}
 	}
 }})
 
@@ -116,6 +110,51 @@ FACTION_SUNRISE = rp.AddFaction({name = 'Sunrise', printName = 'Сыны Рас�
 	rp_city17_urfim = {
 		{Vector(928, 5707, -466), Angle(0, 178, 0),  'models/player/tfa_kz_helghast_assault.mdl'}
 	}
+}})
+
+FACTION_ANTIHUMAN = rp.AddFaction({name = 'OTA.Anti-human', printName = 'OTA.Anti-Human', npcs = {
+	rp_city17_urfim = {
+		{Vector(5816, -2035, 2180), Angle(0, 51, 0), 'models/dpfilms/metropolice/playermodels/pm_police_fragger_fix.mdl'}
+	},
+}, footstepSound = {
+	Sound("npc/metropolice/gear1.wav"),
+	Sound("npc/metropolice/gear2.wav"),
+	Sound("npc/metropolice/gear3.wav"),
+	Sound("npc/metropolice/gear4.wav"),
+	Sound("npc/metropolice/gear5.wav"),
+	Sound("npc/metropolice/gear6.wav"),
+},
+	OTARelations = Color(51, 204, 0),
+})	
+
+FACTION_BANDITS2 = rp.AddFaction({name = 'Sons of Anarchy', printName = 'Sons of Anarchy', npcs = {
+	rp_city17_urfim = {
+		{Vector(-5720, -7669, 80), Angle(0, 0, 0), 'models/player/trent/uc_soldier.mdl'},
+	},
+}, 
+	OTARelations = Color(255, 0, 0),
+})
+
+FACTION_APETIR = rp.AddFaction({name = 'Aperture Laboratory', printName = 'Aperture Laboratory', npcs = {
+	rp_city17_urfim = {
+		{Vector(1119, 966, -466), Angle(0, -91, 0), 'models/player/portal/male_02_aperture.mdl'},
+	},
+}, 
+	OTARelations = Color(255, 0, 0),
+})
+
+FACTION_LU = rp.AddFaction({name = 'LU', printName = 'Отряд LU', npcs = {
+	rp_city17_urfim = {
+		{Vector(-3897, -75, 80), Angle(0, 8, 0), 'models/player/arctic.mdl'},
+	},
+}, 
+	OTARelations = Color(255, 0, 0),
+})
+
+FACTION_PULP = rp.AddFaction({name = 'SWAT', printName = 'SWAT', npcs = {
+	rp_city17_urfim = {
+		{Vector(-5577.836426,-5884.031250,80.031250), Angle(0, -90, 0),  'models/player/ct_urban.mdl'}
+	},
 }})
 
 function PLAYER:IsZombie()

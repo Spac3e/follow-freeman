@@ -5,7 +5,7 @@
 --
 
 local legion_spawns = {
-	rp_city17_urfim = {Vector(5909.273926,-2033.834595,2180.031250), Vector(6020.626465,-2035.396851,2180.031250), Vector(6064.172363,-1968.121948,2180.031250), Vector(5985.590332,-1967.364258,2180.031250)},
+	rp_city17_urfim = {Vector(5614.711426,-1268.037109,12.031250), Vector(5610.963379,-1180.394287,12.031250), Vector(5541.260742,-1183.052612,12.031250), Vector(5543.654785,-1249.694092,12.031250)},
 }
 
 rp.addTeam("Штурмовик 9-th Legion", {
@@ -884,219 +884,278 @@ rp.SetFactionVoices({FACTION_LEGION}, {
 
 })
 
---
-
---Pulp
-
---
-
-
-
 local pulp_spawns = {
-	rp_city17_urfim = {Vector(-5442.462891,-5677.480957,80.031250), Vector(-5245.602539,-5687.049805,80.031250)},
+	rp_city17_urfim = {Vector(-5372.442383,-5640.438477,80.031250)},
 }
+if !isSerious and !isIndsutrial then
+TEAM_SWAT = rp.addTeam("Информатор", {
+    color = Color(128, 0, 128),
+	model = {"models/player/swat.mdl","models/player/riot.mdl", "models/gascit3/gascit3.mdl"},
+	description = [[
+]],
+	weapons = {"swb_usp", "swb_smg", "swb_shotgun", "swb_m4a1"},
+	salary = 10,
+	command = "sw2a23t",
+	CustomCheckFailMsg = 'New Order',
+	unlockTime = 190 * 3600,
+	spawns = pulp_spawns,
+	candisguise = true,
+	disguise_faction = FACTION_CITIZEN,		
+	vip = true,
+	armor = 150,
+	PlayerSpawn = function(ply) ply:SetHealth(150) ply:GiveArmor(150) end,
+	customCheck = function(ply) return (ply:GetOrg() == "The New Order") or ply:SteamID() == "STEAM_0:0:172256227" or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:0:231675719" or ply:SteamID() == "STEAM_0:0:206926999" or ply:SteamID() == "STEAM_0:1:167352045" or ply:SteamID() == "STEAM_0:0:179274506" or ply:SteamID() == "STEAM_0:0:162936594" or ply:SteamID() == "STEAM_0:1:27605715" or ply:SteamID() == "STEAM_0:0:465993930" or ply:IsRoot() end,
+	faction = FACTION_PULP,
+	rationCount = 1,
+	loyalty = 5
+})
 
-TEAM_SWAT = rp.addTeam("Довоенный спецназ", {
 
-    color = Color(0, 0, 0),
-
+TEAM_S1234 = rp.addTeam("Довоенный спецназ", {
+    color = Color(128, 0, 128),
 	model = {"models/player/swat.mdl","models/player/riot.mdl"},
-
 	description = [[
-
 ]],
-
-	weapons = {"swb_357","swb_ar3", "weapon_frag", "weapon_crossbow","swb_m3super90"},
-
-	salary = 30,
-
-	max = 4,
-
-	command = "swat",
-
+	weapons = {"swb_ar3", "weapon_frag", "swb_p90","swb_m3super90"},
+	salary = 14,
+	vip = true,
+	command = "s1wa3t",
+	CustomCheckFailMsg = 'New Order',
 	spawns = pulp_spawns,
-
-	PlayerSpawn = function(ply) ply:GiveArmor(150) end,
-
-	customCheck = function(ply) return ply:GetOrg() == "Pulp Fiction" or ply:IsRoot() end,
-
+	armor = 350,
+	PlayerSpawn = function(ply) ply:SetMaxHealth(100) ply:SetRunSpeed(300) end,
+	customCheck = function(ply) return CLIENT or (ply:GetOrg() == "The New Order" && (ply:GetOrgData().Rank == 'Co-Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'SWAT+Combine' or ply:GetOrgData().Rank == 'Inquisitor' or ply:GetOrgData().Rank == 'Veteran' or ply:GetOrgData().Rank == 'Liberator' or ply:GetOrgData().Rank == 'Pre-War SWAT' or ply:GetOrgData().Rank == 'Leader')) or ply:SteamID() == "STEAM_0:0:206926999"  or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:0:172256227" or ply:SteamID() == "STEAM_0:0:99555324" or ply:SteamID() == "STEAM_0:1:197871680" or ply:SteamID() == "STEAM_0:0:179274506"  or ply:SteamID() == "STEAM_0:1:167352045" or ply:SteamID() == "STEAM_0:1:27605715" or ply:SteamID() == "STEAM_0:0:181738416" or ply:IsRoot() end,
 	faction = FACTION_PULP,
-
-	unlockTime = 100 * 3600,
-
-	rationCount = 4,
-
-	loyalty = 1,
-
+	unlockTime = 245 * 3600,
+	rationCount = 1,
+	loyalty = 9
 })
 
-
-
-TEAM_SWAT_MED = rp.addTeam("Боевой медик", {
-
-    color = Color(0, 0, 0),
-
+TEAM_SWAT_VET = rp.addTeam("Боец Поддержки", {
+    color = Color(128, 0, 128),
 	model = {"models/player/gasmask.mdl"},
-
 	description = [[
-
 ]],
-
-	weapons = {"swb_p228","swb_mac10", "weapon_frag", "weapon_medkit", "med_kit"},
-
-	salary = 30,
-
-	max = 3,
-
+	weapons = {"swb_mac10", "weapon_frag", "weapon_medkit"},
+	salary = 13,
+	max = 6,
+	vip = true,
 	command = "swatmed",
-
 	spawns = pulp_spawns,
-
-	PlayerSpawn = function(ply) ply:GiveArmor(150) end,
-
-	customCheck = function(ply) return ply:GetOrg() == "Pulp Fiction" or ply:IsRoot() end,
-
+	armor = 350,
+	candisguise = true,
+	disguise_faction = FACTION_COMBINE,		
+	CustomCheckFailMsg = 'New Order',
+	PlayerSpawn = function(ply) ply:SetMaxHealth(100) end,
+	customCheck = function(ply) return CLIENT or (ply:GetOrg() == "The New Order" && (ply:GetOrgData().Rank == 'Co-Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'SWAT+Combine' or ply:GetOrgData().Rank == 'Inquisitor' or ply:GetOrgData().Rank == 'Veteran' or ply:GetOrgData().Rank == 'Liberator' or ply:GetOrgData().Rank == 'Leader'))  or ply:SteamID() == "STEAM_0:1:167352045" or ply:SteamID() == "STEAM_0:0:206926999"  or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:0:172256227"  or ply:SteamID() == "STEAM_0:0:179274506"
+	or ply:SteamID() == "STEAM_0:1:17121679" 
+    or ply:SteamID() == "STEAM_0:1:27605715"	
+	or ply:SteamID() == "STEAM_0:1:212887019" 
+	or ply:IsRoot() end,
 	faction = FACTION_PULP,
-
 	canCapture = true,
-
-	unlockTime = 150 * 3600,
-
-	rationCount = 4,
-
-	loyalty = 1,
-
+	unlockTime = 320 * 3600,
+	rationCount = 1,
+	loyalty = 7
 })
 
-
-
-TEAM_SWAT_SM = rp.addTeam("SMIT", {
-
-    color = Color(0, 0, 0),
-
+TEAM_SWAT_SM = rp.addTeam("S.M.I.T.", {
+    color = Color(128, 0, 128),
 	model = {"models/players/outlaw/bmsfemassasin.mdl"},
+	description = [[ "Леди"
+- бойцы отряда, в основном охраняющие Консула/АГ от повстанцев и ампутации со стороны ГО. Более спокойны и сдержаны, способны долгое время сидеть на одном месте и ждать.
 
-	description = [[ Специальная Модернизированная Команда Невидимок.
+"Гроза"
+- Бойцы S.M.I.T., посвятившие жизнь устранению определённых целей. В основном сидят на крышах или на стенах, часто меняя положения и докладывая об обстановке, но могут ликвидировать нарушителей
 
-	Учёные из сопротивления, под надзором и при помощи Инквизитора, создали особый проект, основываясь на готовых технологиях Альянса. Проект костюма невидимки. Иначе - стелс система.
-
-Пока что было создано всего три экземпляра брони.
-
-
-
-Костюм имел свойство преломлять, отражать и проецировать свет, но технология была далека от совершенства. Резкие движения могут быть замечены с близкого расстояния, особенно для отряда сверхчеловеческого патруля.
-
-
-
-Существенным минусом длительного ношения брони стала частичная потеря памяти, расстройство личности и, как правило, потеря большинства эмоций. Во время испытаний пострадали люди, носившие броню, пускай их удалось откачать, но некоторые последствия были неизлечимы. Испытания на самых стойких людях не дали результата, психика многих не выдерживала. Исследования было решено прекратить, пока не пришла немая девушка по имени Элли Хаос. Многие знали её трагическую историю, когда горы трупов окружали её. Психика была нарушена, Элли сломана и больше не могла говорить. Ей множество раз отказывали в испытаниях, но в конце концов Инквизитор дал согласие.
-
-
-
-Результат был поражающим. Спустя неделю упорных тренировок Элли потеряла большинство старых воспоминаний, боль прошлого стремительно ушла. Вместо отчаяния пришло новое чувство - благодарность и жажда служить тому, кто помог избавиться от страданий. Элли Хаос и возглавила отряд S.M.I.T.
-
-
-
-После этого испытания проводились на душевно больных девушках, которые не смогли спокойно пережить семичасовую войну и её первые годы.
-
+"Таура"
+- вечно движущиеся бойцы, занимающиеся как разведкой, так и нападениями. В основном ведут свои дела в помещениях, хорошо ориентируясь в пространстве и запоминая дороги.
 ]],
-
-	weapons = {"weapon_bp_sniper","swb_awp", "swb_p228", "swb_knife","climb_swep","weapon_camo"},
-
-	salary = 30,
-
-	max = 3,
-
+	weapons = {"weapon_bp_sniper","swb_tmp", "swb_knife","climb_swep","swb_usp", "weapon_m82", "cloaking-10seconds", "vss_custom"},
+	salary = 14,
+	stamina = 4,
+	max = 1,
+	vip = true,
 	command = "swatsm",
-
+	notDisguised = true,
 	spawns = pulp_spawns,
-
-	PlayerSpawn = function(ply) ply:SetRunSpeed(350) end,
-
-	customCheck = function(ply) return ply:GetOrg() == "Pulp Fiction" or ply:IsRoot() end,
-
+	CustomCheckFailMsg = 'New Order',
+	armor = 350,
+	PlayerSpawn = function(ply) ply:SetRunSpeed(350) ply:SetMaxHealth(150) ply:SetHealth(150) end,
+	customCheck = function(ply) return (ply:GetOrg() == "The New Order" && (ply:GetOrgData().Rank == 'Co-Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'Leader')) or ply:SteamID() == "STEAM_0:0:172256227"  or ply:SteamID() == "STEAM_0:1:167352045" or ply:SteamID() == "STEAM_0:0:179274506" or ply:SteamID() == "STEAM_0:0:206926999"  or ply:SteamID() == "STEAM_0:0:445131573"
+	or ply:SteamID() == "STEAM_0:1:219739348" 
+	or ply:SteamID() == "STEAM_0:0:120669385"
+	or ply:SteamID() == "STEAM_0:1:109039575"
+	or ply:SteamID() == "STEAM_0:0:441756207"
+	or ply:SteamID() == "STEAM_0:1:552090938"
+	or ply:SteamID() == "STEAM_0:0:205323204"
+	 or ply:SteamID() == "STEAM_0:1:27605715"
+	or ply:SteamID() == "STEAM_0:0:94737103"  
+	or ply:SteamID() == "STEAM_0:1:433186291"
+	or ply:SteamID() == "STEAM_0:1 228135678"
+	or ply:SteamID() == "STEAM_0:1:209544128"
+	or ply:IsRoot() end,
 	faction = FACTION_PULP,
-
-	unlockTime = 200 * 3600,
-
-	rationCount = 2,
-
-	loyalty = 1,
-
+	unlockTime = 350 * 3600,
+	rationCount = 1,
+	loyalty = 4
 })
 
-
-
-rp.addTeam("Инквизитор", {
-
-    color = Color(0, 0, 0),
-
-	model = "models/hunk_orc.mdl",
-
+TEAM_SWAT_INK = rp.addTeam("Инквизитор", {
+    color = Color(128, 0, 128),
+	model = "models/player/bobert/mhwsmc.mdl",
 	description = [[Наёмный убийца, некогда элитный снайпер Альянса, давший волю чувствам.]],
-
-	weapons = {"weapon_pistol","swb_ar3", "lockpick", "keypad_cracker", "swb_knife", "weapon_bp_sniper","climb_swep"},
-
-	salary = 35,
-
+	weapons = {"weapon_pistol", "swb_ar3", "swb_knife", "climb_swep", "weapon_bp_flaregun", "fas2_cweaponry_pdshotgun"},
+	salary = 14,
 	max = 1,
-
-	command = "inq",
-
+	command = "i3n1q",
+	vip = true,
 	spawns = pulp_spawns,
-
-	PlayerSpawn = function(ply) ply:GiveArmor(150) end,
-
-	customCheck = function(ply) return ply:SteamID() == "STEAM_0:1:71049696" or ply:IsRoot() end,
-
+	candisguise = true,
+	disguise_faction = FACTION_CWU,
+	canDiplomacy = true,
+	armor = 450,
+	CustomCheckFailMsg = 'New Order',
+	PlayerSpawn = function(ply) ply:SetMaxHealth(150)  ply:SetHealth(150) ply:SetRunSpeed(310)
+	ply:SetBodygroup(0, 2)
+	ply:SetBodygroup(1, 2)
+		end,
+	customCheck = function(ply) return CLIENT or (ply:GetOrg() == "The New Order" && (ply:GetOrgData().Rank == 'Co-Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'SWAT+Combine' or ply:GetOrgData().Rank == 'Inquisitor' or ply:GetOrgData().Rank == 'Leader' or ply:GetOrgData().Rank == 'Leader' or ply:GetOrgData().Rank == 'Leader'))  or ply:SteamID() == "STEAM_0:1:167352045" or ply:SteamID() == "STEAM_0:0:172256227" or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:0:206926999" or ply:SteamID() == "STEAM_0:0:179274506"
+	or ply:SteamID() == "STEAM_0:0:139915283" 
+	or ply:SteamID() == "STEAM_0:1:156408149"
+	or ply:SteamID() == "STEAM_0:0:53659300"
+	or ply:SteamID() == "STEAM_0:1:228135678"
+	or ply:SteamID() == "STEAM_0:1 228135678"
+	or ply:SteamID() == "STEAM_0:0:53659300"
+	or ply:SteamID() == "STEAM_0:0:175506079"
+	or ply:SteamID() == "STEAM_0:0:182691549"
+	or ply:SteamID() == "STEAM_0:1:422905626"
+	or ply:SteamID() == "STEAM_0:0:186978320"
+	 or ply:SteamID() == "STEAM_0:1:27605715"
+	or ply:SteamID() == "STEAM_0:0:176814786"
+	or ply:IsRoot() end,
 	faction = FACTION_PULP,
-
 	canCapture = true,
-
-	rationCount = 3,
-
-	loyalty = 3,
-
-	hitman = true,
-
+	rationCount = 1,
+	unlockTime = 350 * 2600,
+	loyalty = 5,
+	hitman = true
 })
 
 
-
-rp.addTeam("Ветеран SWAT", {
-
-    color = Color(0, 0, 0),
-
-	model = "models/konnie/blackopsmodel/blackopsmodel_niikfix.mdl",
-
+TEAM_SWAT_MED = rp.addTeam("Ветеран SWAT", {
+    color = Color(128, 0, 128),
+	model = "models/models/konnie/blackopsmodel/blackopsmodel_niikfix.mdl",
 	description = [[Правила: является бойцом S.W.A.T. , подчиняется инквизитору, может действовать во всех секторах в том числе и в одиночку.
-
 	Личная профа Михаила]],
-
-	weapons = {"swb_deagle","swb_m249"},
-
-	salary = 28,
-
-	max = 1,
-
+	weapons = {"swb_deagle","swb_shotgun", "climb_swep", "weapon_radio", "fas2_cweaponry_pshotgun", "weapon_bp_sniper", "weapon_bp_hmg1", "swb_mac10"},
+	salary = 14,
+	max = 4,
+	vip = true,
 	command = "vetsw",
-
 	spawns = pulp_spawns,
-
-	PlayerSpawn = function(ply) ply:GiveArmor(300) end,
-
-	customCheck = function(ply) return ply:SteamID() == "STEAM_0:0:134718150" or ply:IsRoot() end,
-
+	armor = 450,
+	candisguise = true,
+	disguise_faction = FACTION_COMBINE,		
+	CustomCheckFailMsg = 'New Order',
+	PlayerSpawn = function(ply) ply:SetHealth(150) ply:SetMaxHealth(150) ply:SetRunSpeed(350) end,
+	customCheck = function(ply) return CLIENT or  (ply:GetOrg() == "The New Order" && (ply:GetOrgData().Rank == 'Co-Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'SWAT+Combine' or ply:GetOrgData().Rank == 'Inquisitor' or ply:GetOrgData().Rank == 'Veteran' or ply:GetOrgData().Rank == 'Leader'))  or ply:SteamID() == "STEAM_0:1:167352045" or ply:SteamID() == "STEAM_0:0:179274506" or ply:SteamID() == "STEAM_0:0:172256227" or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:0:206926999"
+	or ply:SteamID() == "STEAM_0:1:17121679" 
+	or ply:SteamID() == "STEAM_0:0:176814786" 
+	 or ply:SteamID() == "STEAM_0:1:27605715"
+	or ply:SteamID() == "STEAM_0:0:151059881"  
+	or ply:SteamID() == "STEAM_0:0:189968791"
+	or ply:SteamID() == "STEAM_0:0:440736288"
+	or ply:SteamID() == "STEAM_0:0:112964853"
+	or ply:SteamID() == "STEAM_0:1 228135678"
+	or ply:SteamID() == "STEAM_0:1:47913653"
+	or ply:SteamID() == "STEAM_0:1:120957489"
+	or ply:SteamID() == "STEAM_0:0:18846468"
+	or ply:SteamID() == "STEAM_0:0:38033725"  
+	or ply:IsRoot() end,
 	faction = FACTION_PULP,
-
+	unlockTime = 315 * 1000,
 	canCapture = true,
-
-	rationCount = 3,
-
-	loyalty = 3,
-
+	rationCount = 1,
+	loyalty = 5,
 })
 
+rp.addTeam("C17.SECRET.SOLDIER", {
+    color = Color(128, 0, 128),
+	model = "models/combine_soldier_pmc.mdl",
+	description = [[]],
+	weapons = {"swb_ar3","climb_swep","swb_xm1014", "cloaking-10seconds", "weapon_medkit"},
+	salary = 14,
+	max = 4,
+	vip = true,
+	command = "ilitus",
+	spawns = ofc_spawns,
+	CustomCheckFailMsg = 'New Order',
+	notDisguised = true,
+	armor = 350,
+	PlayerSpawn = function(ply) ply:SetMaxHealth(125) ply:SetHealth(125)  end,
+	customCheck = function(ply) return (ply:GetOrg() == "The New Order" && (ply:GetOrgData().Rank == 'Co-Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'Soldier+Assassin' or ply:GetOrgData().Rank == 'SWAT+Combine' or ply:GetOrgData().Rank == 'Soldier+Assassinr' or ply:GetOrgData().Rank == 'S M I T' or ply:GetOrgData().Rank == 'Almennt' or ply:GetOrgData().Rank == 'Leader')) or ply:SteamID() == "STEAM_0:0:172256227" or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:0:206926999" or ply:SteamID() == "STEAM_0:1:167352045" or ply:SteamID() == "STEAM_0:0:179274506" 
+	or ply:SteamID() == "STEAM_0:1:17121679" 
+	or ply:SteamID() == "STEAM_0:0:176814786"  
+	or ply:SteamID() == "STEAM_0:1:433186291"
+	or ply:SteamID() == "STEAM_0:0:120669385"
+	or ply:SteamID() == "STEAM_0:1:68697051"
+	or ply:SteamID() == "STEAM_0:0:139915283"
+	or ply:SteamID() == "STEAM_0:0:151087587"
+	or ply:SteamID() == "STEAM_0:1:482091574"
+	 or ply:SteamID() == "STEAM_0:1:27605715"
+	or ply:SteamID() == "STEAM_0:1:462299533" 
+	or ply:SteamID() == "STEAM_0:1:457507249"
+	or ply:SteamID() == "STEAM_0:1:148332861"
+	or ply:SteamID() == "STEAM_0:0:198841099"
+	or ply:SteamID() == "STEAM_0:0:205323204"
+	or ply:SteamID() == "STEAM_0:1:197871680"
+	or ply:SteamID() == "STEAM_0:1:109039575"
+	or ply:SteamID() == "STEAM_0:0:53659300"
+	or ply:SteamID() == "STEAM_0:1 228135678"
+	or ply:SteamID() == "STEAM_0:1:156408149"
+	or ply:SteamID() == "STEAM_0:1:455268019"
+	or ply:IsRoot() end,
+	faction = FACTION_COMBINE,
+	unlockTime = 350 * 1000,
+	canCapture = true,
+	rationCount = 1,
+	loyalty = 3
+})
 
+if !isSerious and !isIndsutrial then
+rp.addTeam("Костоправ", {
+    color = Color(3, 175, 170),
+	model = "models/jessev92/hl2/characters/tanaka_ply.mdl",
+	description = [[
+]],
+	weapons = {"swb_knife", "weapon_m82", "weapon_medkit_fast", "vss_custom"},
+	salary = 15,
+	command = "kostop",
+	spawns = outlaws_spawns,
+	max = 1,
+	armor = 350,
+	vip = true,
+	candisguise = true,
+	disguise_faction = FACTION_COMBINE,
+	PlayerSpawn = function(ply) ply:SetMaxHealth(150) ply:SetHealth(150) end,
+	customCheck = function(ply) return (ply:GetOrg() == "The New Order" && (ply:GetOrgData().Rank == 'Co-Leader' or ply:GetOrgData().Rank == 'Sponsor' or ply:GetOrgData().Rank == 'Leader')) or ply:SteamID() == "STEAM_0:0:139915283" or ply:SteamID() == "STEAM_0:1:58909093" or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:1:27605715" or ply:SteamID() == "STEAM_0:0:151087587" or ply:SteamID() == "STEAM_0:0:172256227" or ply:SteamID() == "STEAM_0:0:445131573" or ply:SteamID() == "STEAM_0:1:422905626" or ply:SteamID() == "STEAM_0:0:206926999" or ply:SteamID() == "STEAM_0:0:179274506" or ply:IsRoot() end,
+	faction = FACTION_BANDITS,
+	rationCount = 1,
+	loyalty = 9
+})
+end
+
+local speed = rp.cfg.RunSpeed
+local team_NumPlayers = team.NumPlayers
+hook.Add("PlayerLoadout", function(ply)
+	if (ply:GetFaction() == FACTION_PULP) && team_NumPlayers(TEAM_SWAT_INK) > 0 then
+		ply:SetRunSpeed(speed * 1.1)
+		rp.Notify(ply, NOTIFY_GREEN, rp.Term('puplpbust'))
+		ply:GiveArmor(25)
+	end
+end) 
+end 
 
 --
 
@@ -1399,15 +1458,8 @@ TEAM_SUN_AP = rp.addTeam("Апостол Рассвета", {
 
 })
 
-rp.AddDoorGroup('Нексус', rp.GetFactionTeams({FACTION_COMBINE, FACTION_DPF, FACTION_OTA, FACTION_HELIX, FACTION_DAP, FACTION_LEGION}, {TEAM_KAEF, TEAM_MAYOR1, TEAM_CWU_LEADER, TEAM_REFERENT, TEAM_EMPLOYER, TEAM_VASIL, TEAM_SKI}))
-
+rp.AddDoorGroup('Нексус', rp.GetFactionTeams({FACTION_COMBINE, FACTION_DPF, FACTION_OTA, FACTION_HELIX, FACTION_DAP, FACTION_LEGION}, {TEAM_KAEF, TEAM_MAYOR1, TEAM_CWU_LEADER, TEAM_REFERENT, TEAM_EMPLOYER, TEAM_VASIL, TEAM_SKI, TEAM_SWAT_INK, TEAM_SECR}))
 rp.AddDoorGroup('Сыны Рассвета',{FACTION_SUNRISE})
-
-
-
-rp.addGroupChat(unpack(rp.GetFactionTeams({FACTION_SUNRISE})))
-
 rp.addGroupChat(unpack(rp.GetFactionTeams({FACTION_PULP})))
-
+rp.addGroupChat(unpack(rp.GetFactionTeams({FACTION_SUNRISE})))
 rp.addGroupChat(unpack(rp.GetFactionTeams({FACTION_LEGION})))
-

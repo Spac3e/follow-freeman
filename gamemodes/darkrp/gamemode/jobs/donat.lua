@@ -451,7 +451,7 @@ TEAM_GMAN = rp.addTeam('Эксперимент №173', {
 
 ]],
 
-	command = 'e173',
+	command = 'experiment173',
 
 	weapons = {'sh_blinkswep'},
 
