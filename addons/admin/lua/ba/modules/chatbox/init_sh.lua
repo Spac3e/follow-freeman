@@ -1,3 +1,5 @@
+
+-----------------------------------------------------
 nw.Register 'IsTyping'
 	:Write(net.ReadBool)
 	:Read(net.WriteBool)

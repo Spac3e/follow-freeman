@@ -1,3 +1,5 @@
+
+-----------------------------------------------------
 chat.OldAddText = chat.OldAddText or chat.AddText
 function chat.AddText(...)
 	if IsValid(LocalPlayer()) then 

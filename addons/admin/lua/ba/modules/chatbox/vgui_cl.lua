@@ -1,3 +1,5 @@
+
+-----------------------------------------------------
 --surface.CreateFont('TargetID', {font = 'Sans',size = ba.ScreenScale(18),weight = 800,antialias = false, outline=true})
 --surface.CreateFont('ChatLine', {font = 'Sans',size = ba.ScreenScale(19),weight = 800,antialias = true})
 
@@ -85,67 +87,69 @@ end
 
 local cache = 'badmin/emotes.dat'
 local function loademotes(dat)
-	if !dat then
-		timer.Simple(1, function()
-			http.Fetch('http://twitchemotes.com/api_cache/v2/global.json', function(body)
-				file.Write(cache, body)
-				local dat = util.JSONToTable(body)
-				loademotes(dat)
-			end, function()
-				if file.Exists(cache, 'DATA') then
-					local dat = util.JSONToTable(file.Read(cache, 'DATA'))
-					loademotes(dat)
-				end
-			end)
-		end)
-		return
-	end
-	local url = dat.template.small
-	for k, v in pairs(dat.emotes) do
-		local url = string.Replace(url, '{image_id}', tostring(v.image_id))
-		wmat.Create('Twitch_Emote_' .. k, {
-			W = 32,
-			H = 32,
-			URL = url,
-			Cache = true
-		}, function(mat)
-			ba.twitchEmotes[k] = mat
-		end)
-	end
+    if !dat then
+        timer.Simple(1, function()
+            http.Fetch('http://twitchemotes.com/api_cache/v2/global.json', function(body)
+                file.Write(cache, body)
+                local dat = util.JSONToTable(body)
+                loademotes(dat)
+            end, function()
+                if file.Exists(cache, 'DATA') then
+                    local dat = util.JSONToTable(file.Read(cache, 'DATA'))
+                    loademotes(dat)
+                end
+            end)
+        end)
+        return
+    end
+    local url = dat.template.small
+    for k, v in pairs(dat.emotes) do
+        local url = string.Replace(url, '{image_id}', tostring(v.image_id))
+        wmat.Create('Twitch_Emote_' .. k, {
+            W = 32,
+            H = 32,
+            URL = url,
+            Cache = true
+        }, function(mat)
+            ba.twitchEmotes[k] = mat
+        end)
+    end
 end
 
 function ba.CreateChatBox()
-	if not IsValid(LocalPlayer()) then return end
-	local frame = vgui.Create('ba_chatbox')
-	
-	frame:AddMessage({Color(255, 100, 0), '| ', Color(255, 255, 255), 'Добро пожаловать на ', Color(51, 128, 255), 'urf.im'})
+    if not IsValid(LocalPlayer()) then return end
+    local frame = vgui.Create('ba_chatbox')
+    
+    frame:AddMessage({Color(255, 100, 0), '| ', Color(255, 255, 255), (translates and translates.Get('Добро пожаловать на') or 'Добро пожаловать на') .. ' ', Color(51, 128, 255), 'urf.im'})
+    timer.Simple(10, function()
+        frame:AddMessage({Color(255, 100, 0), '| ', Color(255, 255, 255), (translates and translates.Get("Garry's Mod — значит") or "Garry's Mod — значит") .. ' ', Color(51, 128, 255), 'urf.im'})
+    end)
+    --if file.Exists(cache, 'DATA') and (os.time() - file.Time(cache, 'DATA') > 86400) then
+    --  local dat = util.JSONToTable(file.Read(cache, 'DATA'))
+    --  loademotes(dat)
+    --else
+    --  http.Fetch('http://twitchemotes.com/api_cache/v2/global.json', function(body)
+    --      file.Write(cache, body)
+    --      local dat = util.JSONToTable(body)
+    --      loademotes(dat)
+    --  end, function()
+    --      if file.Exists(cache, 'DATA') then
+    --          local dat = util.JSONToTable(file.Read(cache, 'DATA'))
+    --          loademotes(dat)
+    --      end
+    --  end)
+    --end
+    --
+    --wmat.Create('Twitch_Emote_SUP', {
+    --  W = 32,
+    --  H = 32,
+    --  URL = 'https://portal.superiorservers.co/static/images/sup.png',
+    --  Cache = true
+    --}, function(mat)
+    --  ba.twitchEmotes['SUP'] = mat
+    --end)
 
-	if file.Exists(cache, 'DATA') and (os.time() - file.Time(cache, 'DATA') > 86400) then
-		local dat = util.JSONToTable(file.Read(cache, 'DATA'))
-		loademotes(dat)
-	else
-		http.Fetch('http://twitchemotes.com/api_cache/v2/global.json', function(body)
-			file.Write(cache, body)
-			local dat = util.JSONToTable(body)
-			loademotes(dat)
-		end, function()
-			if file.Exists(cache, 'DATA') then
-				local dat = util.JSONToTable(file.Read(cache, 'DATA'))
-				loademotes(dat)
-			end
-		end)
-	end
-
-	wmat.Create('Twitch_Emote_SUP', {
-		W = 32,
-		H = 32,
-		URL = 'https://portal.superiorservers.co/static/images/sup.png',
-		Cache = true
-	}, function(mat)
-		ba.twitchEmotes['SUP'] = mat
-	end)
-
-	return frame
+    return frame
 end
 
 local LABEL = {}
@@ -613,87 +617,95 @@ function PANEL:PaintOver(w, h)
 end
 
 function PANEL:AddMessage(...)
-	local strings = ''
-	local colors = {}
-	local emotes = {}
-	local emotesww = {}
-	-- Do replacing with ba.twitchEmotes here
-	
-	self.LastMaxOffset = math.Clamp(self.msgFrame:GetCanvas():GetTall() - self.msgFrame:GetTall(), 0, math.huge)
-	
-	table.insert(colors, {Col=Color(200, 200, 200), Pos=1})
-	
-	local data = !self.DoEmotes and {...} or ParseForEmotes(...);
-	self.DoEmotes = false
-	
-	for k, v in ipairs(data[1]) do
-		if (type(v) == 'IMaterial') then
-			-- KAAPAPAPAPAK
-			strings = strings .. '*'
-	
-			emotesww[emotes[table.insert(emotes, {Emote = v, Pos=#strings})].Pos] = true
-		elseif (type(v) == 'string' or type(v) == 'number') then
-			if (v[1] == '>') then
-				table.insert(colors, {Col=Color(140, 200, 100), Pos=string.len(strings)});
-			end
-			strings = strings .. v
-		elseif (type(v) == 'Player') then
-			if (string.len(strings) == 0) then table.remove(colors, 1) end
+    local strings = ''
+    local colors = {}
+    local emotes = {}
+    local emotesww = {}
+    -- Do replacing with ba.twitchEmotes here
+    
+    local utf8_lenstrings;
 
-			table.insert(colors, {Col=team.GetColor(v:Team()), Pos=string.len(strings) + 1})
-			 
-			strings = strings .. v:Name()
-		else
-			if (string.len(strings) == 0) then table.remove(colors, 1) end
-			table.insert(colors, {Col=v, Pos=utf8.len(strings) + 1}) 
-		end
-	end
-	
-	local texts = ba.ui.WordWrap('TargetID', strings, self.msgFrame:GetWide() - 5, emotesww)
-	
-	local shouldPopDown
-	if (self.msgFrame:IsAtMaxOffset()) then
-		shouldPopDown = true
-	end
-	
-	local cursnip = 1
-	for k, v in ipairs(texts) do
-		if (v == '') then continue end
-		
-		if (self._Messages[1000]) then self._Messages[1]:Remove() table.remove(self._Messages, 1) end
-		
-		local lbl = vgui.Create('ba_chatlabel', self.msgFrame:GetCanvas())
-		lbl:SetFont('TargetID')
-		
-		table.insert(self._Messages, lbl)
-		
-		for i, l in ipairs(colors) do
-			if (l.Pos <= cursnip and (!colors[i+1] or colors[i+1].Pos > cursnip)) then
-				lbl:AddColor(1, l.Col)
-			elseif (l.Pos >= cursnip and l.Pos < cursnip + utf8.len(v)) then
-				lbl:AddColor(l.Pos - cursnip + 1, l.Col)
-			end
-		end
-		
-		for i, l in ipairs(emotes) do
-			if (l.Pos >= cursnip and l.Pos < cursnip + utf8.len(v)) then
-				lbl:AddEmote(l.Pos - cursnip + 1, l.Emote)
-			end
-		end
-		
-		lbl:SetText(v)
-		self.msgFrame:AddItem(lbl)
-		
-		cursnip = cursnip + utf8.len(v)
-	end
-	
-	chat.PlaySound()
-	
-	if (shouldPopDown) then
-		self.msgFrame.yOffset = math.Clamp(self.msgFrame:GetCanvas():GetTall() - self.msgFrame:GetTall(), 0, math.huge)
-	end
-	
-	self:InvalidateLayout()
+    self.LastMaxOffset = math.Clamp(self.msgFrame:GetCanvas():GetTall() - self.msgFrame:GetTall(), 0, math.huge)
+    
+    table.insert(colors, {Col=Color(200, 200, 200), Pos=1})
+    
+    local data = !self.DoEmotes and {...} or ParseForEmotes(...);
+    self.DoEmotes = false
+
+    for k, v in ipairs(data[1]) do
+        if (type(v) == 'IMaterial') then
+            -- KAAPAPAPAPAK
+            strings = strings .. '*'
+    
+            emotesww[emotes[table.insert(emotes, {Emote = v, Pos=#strings})].Pos] = true
+        elseif (type(v) == 'string' or type(v) == 'number') then
+            if (v[1] == '>') then
+                table.insert(colors, {Col=Color(140, 200, 100), Pos=utf8.len(strings)});
+            end
+            strings = strings .. v
+        elseif (type(v) == 'Player') then
+            if (utf8.len(strings) == 0) then table.remove(colors, 1) end
+
+            table.insert(colors, {Col=team.GetColor(v:Team()), Pos=utf8.len(strings) + 1})
+             
+            strings = strings .. v:Name()
+        else
+            utf8_lenstrings = utf8.len(strings);
+            if (isbool(utf8_lenstrings)) then 
+                strings = utf8.force(strings);
+                utf8_lenstrings = utf8.len(strings);
+            end
+
+            if (utf8_lenstrings == 0) then table.remove(colors, 1) end
+            table.insert(colors, {Col=v, Pos=utf8_lenstrings + 1})
+        end
+    end
+    
+    local texts = ba.ui.WordWrap('TargetID', strings, self.msgFrame:GetWide() - 5, emotesww)
+    
+    local shouldPopDown
+    if (self.msgFrame:IsAtMaxOffset()) then
+        shouldPopDown = true
+    end
+    
+    local cursnip = 1
+    for k, v in ipairs(texts) do
+        if (v == '') then continue end
+        
+        if (self._Messages[1000]) then self._Messages[1]:Remove() table.remove(self._Messages, 1) end
+        
+        local lbl = vgui.Create('ba_chatlabel', self.msgFrame:GetCanvas())
+        lbl:SetFont('TargetID')
+        
+        table.insert(self._Messages, lbl)
+        
+        for i, l in ipairs(colors) do
+            if (l.Pos <= cursnip and (!colors[i+1] or colors[i+1].Pos > cursnip)) then
+                lbl:AddColor(1, l.Col)
+            elseif (l.Pos >= cursnip and l.Pos < cursnip + utf8.len(v)) then
+                lbl:AddColor(l.Pos - cursnip + 1, l.Col)
+            end
+        end
+        
+        for i, l in ipairs(emotes) do
+            if (l.Pos >= cursnip and l.Pos < cursnip + utf8.len(v)) then
+                lbl:AddEmote(l.Pos - cursnip + 1, l.Emote)
+            end
+        end
+        
+        lbl:SetText(v)
+        self.msgFrame:AddItem(lbl)
+        
+        cursnip = cursnip + utf8.len(v)
+    end
+    
+    chat.PlaySound()
+    
+    if (shouldPopDown) then
+        self.msgFrame.yOffset = math.Clamp(self.msgFrame:GetCanvas():GetTall() - self.msgFrame:GetTall(), 0, math.huge)
+    end
+    
+    self:InvalidateLayout()
 end
 
 function PANEL:DoAutoFill(ret) -- TODO, replace with command autocomplete

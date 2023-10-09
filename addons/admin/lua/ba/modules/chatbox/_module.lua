@@ -1,3 +1,5 @@
+
+-----------------------------------------------------
 ba.Module('Chatbox')
 	:Author('KingOfBeast, Updated by aStonedPenguin')
 	:Include({
