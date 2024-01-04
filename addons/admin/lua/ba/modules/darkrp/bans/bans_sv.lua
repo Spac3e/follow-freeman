@@ -59,7 +59,7 @@ local msg = [[
 Админ: %s
 Причина: %s
 -------------------------------------
-Аппеляция vk.com/mrkubu
+Аппеляция https://discord.gg/mVxqXu6cE3
 ]]
 
 function ba.bans.CheckPassword(steamid, ip, pass, cl_pass, name)

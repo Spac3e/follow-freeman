@@ -115,12 +115,12 @@ elseif (CLIENT) then
 		ui.Create('HTML', function(self, p)
 			self:SetPos(1, 1)
 			self:SetSize(p:GetWide() - 1, p:GetTall() - 1)
-			self:OpenURL('https://vk.com/roleplayscp')
+			self:OpenURL('https://discord.gg/mVxqXu6cE3')
 		end, tab)
 
 		tabList:AddButton('Группа Steam', function()
 			fr:Close()
-			gui.OpenURL('http://steamcommunity.com/groups/urfimofficial')
+			gui.OpenURL('https://discord.gg/mVxqXu6cE3')
 		end)
 
 		tabList:AddButton('Контент', function()

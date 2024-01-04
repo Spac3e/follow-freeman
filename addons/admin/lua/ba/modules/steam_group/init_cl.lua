@@ -1,8 +1,8 @@
 ba.steamGroup = {}
 
-ba.steamGroup.handler = 'https://urf.im/scp/steamgrouphandler.php'
-ba.steamGroup.url = 'http://steamcommunity.com/groups/urfimofficial'
-ba.steamGroup.vkUrl = 'https://vk.com/roleplayscp'
+ba.steamGroup.handler = 'https://discord.gg/mVxqXu6cE3'
+ba.steamGroup.url = 'https://discord.gg/mVxqXu6cE3'
+ba.steamGroup.vkUrl = 'https://discord.gg/mVxqXu6cE3'
 
 function ba.steamGroup.check()
 	timer.Simple(20, function()
